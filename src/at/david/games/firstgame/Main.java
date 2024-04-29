@@ -15,12 +15,8 @@ public class Main extends BasicGame {
 
     private float speed;
 
-
-    public enum Direction { RIGHT, LEFT, UP, DOWN }
-
-    private Direction rectDirection;
-    private Direction circleDirection;
-    private Direction ovalDirection;
+    private boolean ovalMovingRight = true;
+    private boolean circleMovingUp = true;
 
     public Main(String title) {
         super(title);
@@ -30,77 +26,48 @@ public class Main extends BasicGame {
     public void init(GameContainer gameContainer) throws SlickException {
         rectX = 100;
         rectY = 100;
-        ovalX = 80;
-        ovalY = 80;
-        circleX = 45;
-        circleY = 45;
+        ovalX = 100;
+        ovalY = 100;
+        circleX = 100;
+        circleY = 100;
 
         speed = 0.5f;
-
-
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
-        //rectangle: direction
-        if(rectDirection == Direction.RIGHT) {
+        //Rectangle
+        if (rectX < 500 && rectY == 100) {
             rectX += speed;
-        }
-        if(rectDirection == Direction.LEFT) {
-            rectX -= speed;
-        }
-        if(rectDirection == Direction.UP) {
-            rectX -= speed;
-        }
-        if(rectDirection == Direction.DOWN) {
-            rectY += speed;
-        }
-
-        //rectangle: movement
-        if (rectX >= 0 && rectX < 500 && rectY < 400) {
-            rectDirection = Direction.RIGHT;
         } else if (rectX >= 500 && rectY < 400) {
-            rectDirection = Direction.DOWN;
-        } else if (rectY >= 400 && rectX > 0) {
-            rectDirection = Direction.LEFT;
-        } else if (rectX <= 0 && rectY > 0) {
-            rectDirection = Direction.UP;
+            rectY += speed;
+        } else if (rectX > 100) {
+            rectX -= speed;
+        } else if (rectY > 100) {
+            rectY -= speed;
         }
 
-
-
-        //circle: direction
-        if(circleDirection == Direction.UP) {
+        // Circle
+        if (circleMovingUp) {
+            circleY -= speed;
+        } else {
             circleY += speed;
         }
-        if(circleDirection == Direction.DOWN) {
-            circleY -= speed;
+
+        if (circleY <= 0 || circleY >= 530) {
+            circleMovingUp = !circleMovingUp;
         }
 
-        //circle: movement
-        if(circleY>=0) {
-            circleDirection = Direction.DOWN;
-        } if (circleY <= 500) {
-            circleDirection = Direction.UP;
-        }
-
-        //oval: direction
-        if(ovalDirection == Direction.RIGHT) {
+        // Oval
+        if (ovalMovingRight) {
             ovalX += speed;
-        }
-        if(ovalDirection == Direction.LEFT) {
+        } else {
             ovalX -= speed;
         }
 
-        //oval: movement
-        if(ovalX >= 0) {
-            ovalDirection = Direction.RIGHT;
+        if (ovalX >= 400 || ovalX <= 0) {
+            ovalMovingRight = !ovalMovingRight;
         }
-
-        if(ovalX == 500) {
-            ovalDirection = Direction.LEFT;
-        }
-
     }
 
     @Override
@@ -108,8 +75,6 @@ public class Main extends BasicGame {
         graphics.drawRect(rectX, rectY, 100, 100);
         graphics.drawOval(ovalX, ovalY, 50, 90);
         graphics.drawOval(circleX, circleY, 70, 70);
-
-        graphics.drawString("Hello World!", 50, 50);
     }
 
     public static void main(String[] argv) {
