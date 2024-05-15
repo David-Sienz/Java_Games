@@ -20,7 +20,7 @@ public class Rectangle {
     public void update(int delta) {
         this.x += (float)delta / this.speed;
 
-        if (this.x > 600) {
+        if (this.x > 800) {
             this.x = 0;
         }
     }
