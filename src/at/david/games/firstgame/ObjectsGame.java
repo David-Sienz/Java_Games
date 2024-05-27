@@ -9,7 +9,6 @@ import java.util.Random;
 public class ObjectsGame extends BasicGame {
     private List<Actor> actors;
 
-
     public ObjectsGame(String title) {
         super(title);
     }
@@ -17,20 +16,21 @@ public class ObjectsGame extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
         this.actors = new ArrayList<>();
-
         Random random = new Random();
-        for (int i = 0; i < 100; i++) {
-            Rectangle rectangle = new Rectangle(random.nextInt(800), random.nextInt(600), random.nextInt(50));
+
+        for (int i = 0; i < 10; i++) {
+            Rectangle.Direction direction = random.nextBoolean() ? Rectangle.Direction.LEFT_TO_RIGHT : Rectangle.Direction.RIGHT_TO_LEFT;
+            Rectangle rectangle = new Rectangle(random.nextInt(800), random.nextInt(600), random.nextFloat() * 50 + 10, direction);
             this.actors.add(rectangle);
         }
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             Circle circle = new Circle();
             this.actors.add(circle);
         }
 
-        for (int i = 0; i < 50; i++) {
-            Ellipse ellipse = new Ellipse(random.nextInt(800), random.nextInt(600), random.nextInt(50));
+        for (int i = 0; i < 10; i++) {
+            Ellipse ellipse = new Ellipse(random.nextInt(800), random.nextInt(600), random.nextInt() * 50 + 10);
             this.actors.add(ellipse);
         }
     }
@@ -40,7 +40,6 @@ public class ObjectsGame extends BasicGame {
         for (Actor actor : this.actors) {
             actor.update(delta);
         }
-
     }
 
     @Override
@@ -48,7 +47,6 @@ public class ObjectsGame extends BasicGame {
         for (Actor actor : this.actors) {
             actor.render(graphics);
         }
-
     }
 
     public static void main(String[] argv) {

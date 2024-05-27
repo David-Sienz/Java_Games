@@ -9,7 +9,7 @@ public class Ellipse implements Actor {
     public Ellipse(int x, int y, int speed) {
         this.x = x;
         this.y = y;
-        this.speed = speed;
+        this.speed = 10;
     }
 
     public void render(Graphics graphics) {
@@ -17,11 +17,13 @@ public class Ellipse implements Actor {
     }
 
     public void update(int delta) {
-        this.x += (float)delta/this.speed;
-        this.y += (float)delta/this.speed;
+        this.x += (float) delta / this.speed;
+        this.y += (float) delta / this.speed;
 
-        if (this.y > 800 && this.x > 600) {
+        if (this.y > 800) {
             this.y = 0;
+        } else if (this.x > 800) {
+            this.x = 0;
         }
     }
 }
