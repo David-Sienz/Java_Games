@@ -1,8 +1,6 @@
 package at.david.games.firstgame;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 
 public class Rocket implements Actor {
     private Image rocketImage;
@@ -21,7 +19,26 @@ public class Rocket implements Actor {
     }
 
     @Override
-    public void update(int delta) {
-        this.x += delta;
+    public void update(GameContainer gameContainer, int delta) {
+        if (gameContainer.getInput().isKeyDown(Input.KEY_LEFT)){
+            this.x -= delta;
+        }
+        if (gameContainer.getInput().isKeyDown(Input.KEY_RIGHT)){
+            this.x += delta;
+        }
+        if (gameContainer.getInput().isKeyDown(Input.KEY_UP)){
+            this.y -= delta;
+        }
+        if (gameContainer.getInput().isKeyDown(Input.KEY_DOWN)){
+            this.y += delta;
+        }
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
     }
 }

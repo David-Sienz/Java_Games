@@ -1,5 +1,6 @@
 package at.david.games.firstgame;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 
 public class Rectangle implements Actor {
@@ -24,7 +25,7 @@ public class Rectangle implements Actor {
         graphics.drawRect(this.x, this.y, 20, 20);
     }
 
-    public void update(int delta) {
+    public void update(GameContainer gameContainer, int delta) {
         if (direction == Direction.LEFT_TO_RIGHT) {
             this.x += (float) delta / this.speed;
             if (this.x > 800) {
