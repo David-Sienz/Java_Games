@@ -18,7 +18,10 @@ public class ObjectsGame extends BasicGame {
         this.actors = new ArrayList<>();
         Random random = new Random();
 
-        for (int i = 0; i < 10; i++) {
+        Rocket rocket = new Rocket();
+        this.actors.add(rocket);
+
+        /*for (int i = 0; i < 10; i++) {
             Rectangle.Direction direction = random.nextBoolean() ? Rectangle.Direction.LEFT_TO_RIGHT : Rectangle.Direction.RIGHT_TO_LEFT;
             Rectangle rectangle = new Rectangle(random.nextInt(800), random.nextInt(600), random.nextFloat() * 50 + 10, direction);
             this.actors.add(rectangle);
@@ -32,7 +35,8 @@ public class ObjectsGame extends BasicGame {
         for (int i = 0; i < 10; i++) {
             Ellipse ellipse = new Ellipse(random.nextInt(800), random.nextInt(600), random.nextInt() * 50 + 10);
             this.actors.add(ellipse);
-        }
+        }*/
+
     }
 
     @Override
